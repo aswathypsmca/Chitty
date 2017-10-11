@@ -58,14 +58,10 @@ $row1 = mysqli_query($con,$q11);
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
     <div class="body_text1">
 <a href="adminhome.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br>
-<!--<div class="dropdown">
-<a href="#" id="user">USERS</a>
-<div class="dropdown-content">
-		<a href="staffreg.php">STAFF</a><br>
-		<a href="memberreg.php">MEMBER</a>
+
+		<a href="cust_view.php">MEMBER</a>
 		
-	</div>
-</div>
+
  <br><br>-->
  
   <a href="logout.php">LOGOUT</a><br>
@@ -85,13 +81,13 @@ $row1 = mysqli_query($con,$q11);
 	
 	<tr><td> TOTAL INSTALLMENT:</td> <td> <input type="number" name="install" min="1" max="100" placeholder="Total installment" required></td></tr></br><tr></tr>
 	<tr><td> DIVISIONS:</td> <td> <input type="number" name="division" min="1" max="20" placeholder="division" required></td></tr></br><tr></tr>
-	<tr><td> AMOUNT:</td> <td><input type="number" name="amount" required></td></tr></br><tr></tr>
+	<tr><td> AMOUNT:</td> <td><input type="varchar" name="amount" required></td></tr></br><tr></tr>
 	
 	<tr><td> START DATE:</td> <td><input type="date" name="sdate"required></td></tr></br><tr></tr>
 	<tr><td ><input type="submit" name="submit" value="Register">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
 	&nbsp&nbsp</table>
 </form>
-</div></div>
+</div></div></div>
 
   
 <!--<center><img src="clg.png" id="ajce_img"width="1100px" height="300px" ></center>-->

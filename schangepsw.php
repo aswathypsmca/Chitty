@@ -45,7 +45,7 @@ header('location:index.php');
 <form name="myform" method="post" action="changepassword.php">
 <table >
 	
-	<tr><td> User name:</td> <td><input type="text" name="uname"></td></tr>
+	<!--<tr><td> User name:</td> <td><input type="text" name="uname"></td></tr>-->
 	<tr><td>password:</td><td><input type="password" name="pwd"></td></tr>
 	<tr><td>new password:</td><td><input type="password" name="pwd2"></td></tr>
 	<tr><td> confirm password:</td><td><input type="password" name="pwd3"></td></tr>

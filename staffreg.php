@@ -50,7 +50,94 @@ $result1=mysqli_query($con,$sql1);
 
   <title>chitty management</title>
   <link rel="stylesheet" href="logo.css">
-  </head>
+ 
+<script>
+function snam()
+{
+  var snam=/^[a-zA-Z ]{4,15}$/;
+   if(document.myform.sname.value.search(snam)==-1)
+    {
+	 alert("Enter correct name");
+	 document.myform.sname.focus();
+	 return false;
+	 }
+	}
+
+	
+
+function semail()
+{
+ var semail=/^[a-zA-Z0-9-_\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+   if(document.myform.email.value.search(semail)==-1)
+    {
+	 alert("Enter correct email");
+	 document.myform.email.focus();
+	 return false;
+	 }
+	}
+
+
+
+
+
+
+	function phone()
+	{
+	var phn=/^[0-9]{10}$/;
+	var len=document.myform.phno.value.length;
+  if(document.myform.phno.value.search(phn)==-1)
+    {
+		if(len!=10)
+		{
+	 alert("Enter correct phone no");
+	 document.myform.phno.focus();
+	 return false;
+	 }
+	 }
+	}
+
+
+
+
+function vali()
+{
+  var snam=/^[a-zA-Z ]{4,15}$/;
+   var emaill=/^[a-zA-Z0-9-_\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+ 
+	 	var phn=/^[0-9]{9,14}$/;
+
+
+	    if(document.myform.sname.value.search(snam)==-1)
+    {
+	 alert("Enter correct name");
+	 document.myform.sname.focus();
+	 return false;
+	 }
+
+  
+
+  else if(document.myform.email.value.search(emaill)==-1)
+    {
+	 alert("Enter correct login name");
+	 document.myform.email.focus();
+	 return false;
+	 }
+
+	  else if(document.myform.phno.value.search(phn)==-1)
+    {
+	 alert("Enter Correct phone no");
+	 document.myform.phno.focus();
+	 return false;
+	 }
+	 	 else
+	{
+	 return true;
+	 }
+	 }
+
+
+</script>
+ </head>
 <body>
   <!-- Div for header section -->
   <div class="header">
@@ -89,21 +176,22 @@ $result1=mysqli_query($con,$sql1);
 <!--<center><h2 class="login_head">-->
 <div class="body_text2">
 
-    <form method="post" name="myform" action="#" onsubmit="return false">
+    <form method="post" name="myform"  action="#" onSubmit="return vali()">
 	<table style="width:200% cellpadding:1%  ">
 	<tr><td><h3>STAFF REGISTRATION</h3></td></tr>
-	<tr><td> NAME:</td> <td><input type="text" name="sname" placeholder="name" required></td></tr></br><tr></tr>
+	<tr><td> NAME:</td> <td><input type="text" name="sname" placeholder="name" onChange="return snam()"></td></tr></br><tr></tr>>
+</td></tr></br><tr></tr>
 	<tr><td> GENDER:</td><td>  <input type="radio" name="sgender" value="male" checked> Male &nbsp&nbsp
                                <input type="radio" name="sgender" value="female"> Female</td></tr></br><tr></tr>
 	<tr><td> ADDRESS:</td> <td><input type="text" name="saddress" placeholder="Address" required></td></tr></br><tr></tr>
-	<tr><td> PHONE:</td> <td><input type="text" name="phno"maxlength="10" placeholder="mob num" required id="phone"></td></tr></br><tr></tr>
-	<tr><td> DOB:</td> <td><input type="date" name="dob" required></td></tr></br><tr></tr>
-	<tr><td> EMAIL:</td> <td><input type="text" name="email" placeholder="mail_id" required id="email"></td></tr></br><tr></tr>
+	<tr><td> PHONE:</td> <td><input type="text" name="phno" placeholder="mob num" required  onChange="return phone()"></td></tr></br><tr></tr>
+	<tr><td> DOB:</td> <td> <input type = "date" name="dob" required></td></tr></br><tr></tr>
+	<tr><td> EMAIL:</td> <td><input type="text" name="email" placeholder="mail_id" onChange="return semail()"></td></tr></br><tr></tr>
 	<tr><td> DOJ:</td> <td><input type="date" name="doj"required></td></tr></br><tr></tr>
-	<tr><td ><input type="submit" name="submit" value="Register">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
+	<tr><td ><input type="submit" name="submit" value="Register" >&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
 	&nbsp&nbsp</table>
 </form>
-<script src="jquery.js">
+
 </div></div>
 
   
@@ -116,5 +204,10 @@ $result1=mysqli_query($con,$sql1);
         <center><marquee>GRAMIN CHITTY MANAGEMENT</marquee></center>
       </div>
 
-    </body>
+
+	  </body>
+	  <!--<script src="jquery.js"></script>
+<script src="validation.js"></script>-->
+
+
     </html>

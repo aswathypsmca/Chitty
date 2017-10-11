@@ -24,13 +24,15 @@ while($row=mysqli_fetch_array($result))
 	?>
 	<?php
 	
-	if($a==  $row['user_name']&&$b==$row['password']&&$row['role_id']==2)
+	if($b==$row['password']&&$row['role_id']==2)
 	{
 			if($d!=$c)	
 			{
-				
-				header('location:schangepsw.php');
 				echo("password are not same");
+				echo "<script> alert ('password are not same!'); </script>";
+				header('location:schangepsw.php');
+				
+				
 				break;
 			}
 
@@ -51,7 +53,7 @@ while($row=mysqli_fetch_array($result))
 		
 	}
 	
-	if($a==  $row['user_name']&&$b==$row['password']&&$row['role_id']==3)
+	if($b==$row['password']&&$row['role_id']==3)
 	{
 			if($d!=$c)	
 			{
@@ -77,7 +79,7 @@ while($row=mysqli_fetch_array($result))
 	
 	
 	
-	if($a==  $row['user_name']&&$b==$row['password']&&$row['log_id']==1)
+	if($b==$row['password']&&$row['log_id']==1)
 	{
 			if($d!=$c)	
 			{

@@ -29,7 +29,7 @@ header('location:index.php');
  <div class="body1">
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
 <div class="body_text1">
-<a href="adminhome.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br><br>
+<a href="stafflogin.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br><br>
 
 
  
@@ -42,10 +42,14 @@ header('location:index.php');
   <!-- Div for login section -->
   <div class="login2">
 
-  <table border=5px style="margin-left:0%; margin-top:10%;">
-<tr><th>ID</th><th>NAME</th><th>ADDRESS</th><th>PHONE</th><th>EMAIL</th><th>PAN</th><th>APPROVE</th></tr>
+
+ <!-- <table border=5px style="margin-left:0%; margin-top:10%;">-->
+ <table border=5px style="margin-left:0%; margin-top:8%;">
+<tr><th>ID</th><th>NAME</th><th>ADDRESS</th><th>PHONE</th><th>EMAIL</th><th>PAN</th><th>CHITTY NAME</th></tr>
 <?php 
-$sql="SELECT * FROM `tbl_customer` where status='0'";
+//$sql="SELECT * FROM `tbl_customer` where status='0'";
+$sql="SELECT * FROM `tbl_customer`,`tbl_chittreg`,`tbl_custchitty` where tbl_customer.cust_id=tbl_custchitty.cust_id and tbl_chittreg.c_id=tbl_custchitty.c_id";
+//$sq2="SELECT chitt_name FROM `tbl_chittreg` where chitt.status='0'";
 $result=mysqli_query($con,$sql);
 //$i=0;
 while($row=mysqli_fetch_array($result))
@@ -59,7 +63,8 @@ while($row=mysqli_fetch_array($result))
 	<td><?php echo $row['c_mob'] ?></td>
     <td><?php echo $row['c_email'] ?></td>
 	<td><?php echo $row['pan'] ?></td>
-	 <td><form action="memberapprove.php" method="post">
+	<td><?php echo $row['chitt_name'] ?></td>
+	 <form action="#" method="post">
 		<input type="hidden" name="id" value="<?php echo $row['cust_id'] ?>" >
 		<input type="hidden" name="cname" value="<?php echo $row['c_name'] ?>" >
 		
@@ -67,27 +72,20 @@ while($row=mysqli_fetch_array($result))
 		<input type="hidden" name="cmob" value="<?php echo $row['c_mob'] ?>" >
 		<input type="hidden" name="cemail" value="<?php echo $row['c_email'] ?>" >
 		<input type="hidden" name="cpan" value="<?php echo $row['pan'] ?>" >
-		<button class="button" name="submit" >ADD</button>
+		<input type="hidden" name="cpan" value="<?php echo $row['chitt_name'] ?>" >
+		</form>
 		
-		</form></td>
-		<!--<form action="deletemember.php" method="post"> -->
-	 
-	 <td><a href="deletemember.php?id=<?php echo $row['cust_id']; ?>">Delete</a></td>
-	</tr>
 	
+	 </td>
+	</tr>
 	<?php
 }
 ?>  
+</table>
+ </div> 
 
-  </table>
-</div>
 
- 
-
-   
-      
-
-      <div class="footer">
+<div class="footer">
         <center><marquee>GRAMIN CHITTY MANAGEMENT</marquee></center>
       </div>
 
