@@ -7,21 +7,24 @@ include 'dbcon.php';
 	//header('location:index.php');
 	}
 
+		$dd = date('Y-m-d');
+
 		if(isset($_POST['submit']))
 		{
-			$a=$_POST["chitname"];
-			$b=$_POST["install"];
-			$c=$_POST["division"];
+			$a=$_POST["chitty"];
+			$b=$_POST["customer"];
+			$c=$_POST["instalno"];
 			$d=$_POST["amount"];
-			//echo $d;
-			$e=$_POST["sdate"];
-	$sql1="INSERT INTO `tbl_chittreg` (`chitt_name`, `installment`, `divisions`, `chitt_amount`, `s_date`, `status`)
-			VALUES ('$a','$b','$c','$d','$e','0')";
-	$result1=mysqli_query($con,$sql1);
-
-	$q11 = "SELECT `c_id` FROM `tbl_chittreg` WHERE `chitt_name`=$a ";
-
+			$e=$_POST["cmonth"];
+	
+	$q11="SELECT `cust_ch_id` FROM `tbl_custchitty`WHERE `c_id`='$a'and `cust_id`='$b'";
 	$row1 = mysqli_query($con,$q11);
+	$r=mysqli_fetch_array($row1);
+    $cr=$r['cust_ch_id'];
+	//echo ($cr); 
+	//NSERT INTO `tbl_auction`(`a_id`, `m_id`, `cust_ch_id`, `install`, `a_winner`, `amount`, `date`)
+	$sql4="INSERT INTO  `tbl_auction`(`m_id`,`cust_ch_id`,`install`,`amount`,`date`)  VALUES ('$e', '$cr','$c','$d','$dd')";
+    $re4=mysqli_query($con,$sql4);
 		}
 ?>
 
@@ -46,7 +49,7 @@ include 'dbcon.php';
 		<div class="body1" >
 		<!-- <center><img src="ajce.png" id="ajce_img"></center>-->
 			<div class="body_text1">
-			<a href="stafflogin.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br>
+			<a href="auction.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br>
 			<br><br>
 			<a href="logout.php">LOGOUT</a><br>
 			</div>
@@ -57,7 +60,7 @@ include 'dbcon.php';
 			<div class="body_text3">
 	<form method="post" name="myform" action="#">
 			<table style="width:200% cellpadding:1%  ">
-			<br><tr><td><h3>CHITTY PAYMENT</h3></td></tr>
+			<br><br><tr><td><h3>AUCTION WINNER</h3></td></tr>
 			<tr><td> CHITTY NAME:</td> 
 			<td><select name="chitty" onchange="getId(this.value);">
 				<option value="">select chitty</option>
@@ -89,8 +92,25 @@ include 'dbcon.php';
 	
 	<tr><td> INSTALLMENT NO:</td> <td> <input type="varchar" name="instalno" placeholder="Total installment" required></td></tr></br><tr></tr>
 	<tr><td> AMOUNT:</td> <td><input type="varchar" name="amount" required></td></tr></br><tr></tr>
-	<tr><td> DIVIDENT:</td> <td><input type="varchar" name="divident" required></td></tr></br><tr></tr>
-	<tr><td> PAYING DATE:</td> <td><input type="date" name="sdate"required></td></tr></br><tr></tr>
+	
+	<tr><td> MONTH:</td><td><select name="cmonth"required>
+    
+     <option value="select" selected>select</option>
+    <option value="1">January</option>
+	<option value="2">February</option>
+    <option value="3">March</option>
+	<option value="4">April</option>
+	<option value="5">May</option>
+	<option value="6">June</option>
+    <option value="7">July</option>
+	<option value="8">August</option>
+	<option value="9">September</option>
+	<option value="10">Octobar</option>
+    <option value="11">November</option>
+	<option value="12">December</option>
+	
+	</select></td></tr></br>
+	
 	<tr><td> STAFF NAME:</td><td><select>
 	<option>select</option>
 		<?php
@@ -106,7 +126,7 @@ include 'dbcon.php';
 		<?php
 		}
 		?>
-	<tr><td ><input type="submit" name="submit" value="PAY">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
+	<tr><td ><input type="submit" name="submit" value="SAVE">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
 	&nbsp&nbsp</table>
 	</form>
 		</div></div></div>

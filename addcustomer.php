@@ -6,6 +6,7 @@ if(!(isset($_SESSION['user_name'])))
 
 header('location:index.php');
 }
+$dd = date('Y-m-d');
 if(isset($_POST['submit']))
 {
 $a=$_POST["em"];//email
@@ -18,7 +19,7 @@ $re=mysqli_query($con,$sql1);
 $row1=mysqli_fetch_array($re);
 $cid=$row1['cust_id'];
 //echo($cid);
-
+         
 //SELECT `c_id`, `chitt_name`, `installment`, `divisions`, `chitt_amount`, `s_date`, `status` FROM `tbl_chittreg` WHERE
 $sql2="SELECT `c_id` FROM `tbl_chittreg` WHERE chitt_name='$b'";
 $re2=mysqli_query($con,$sql2);
@@ -29,21 +30,34 @@ $sql21="SELECT `cust_id` FROM `tbl_custchitty` WHERE `cust_id`='$cid'";
 $re5=mysqli_query($con,$sql21);	
 $row3=mysqli_fetch_array($re5);
 //print_r($row3);
-$c1=$row3['cust_id'];
-if($c1==" ")
-{
-	
-//INSERT INTO `tbl_custchitty`(`cust_ch_id`, `c_id`, `cust_id`, `status`) VALUES ([value-1],[value-2],[value-3],[value-4])
-$sql4="INSERT INTO `tbl_custchitty`(`c_id`, `cust_id`, `status`) VALUES ('$chid', '$cid', '0')";
+//$c1=$row3['cust_id'];
+//if($c1==" ")
+//{
+	$sql9="SELECT cust_id FROM `tbl_custchitty` WHERE `cust_id`='$cid' and `c_id`='$chid'";
+	$re9=mysqli_query($con,$sql9);	
+$row9=mysqli_fetch_array($re9);
+$a=count($row9);
+//echo $a;
+	if($a>0)
+	{
+		echo"<script>alert('already exists!!!!');</script>";
+	}
+	else{
+		//INSERT INTO `tbl_custchitty`(`cust_ch_id`, `c_id`, `cust_id`, `status`) VALUES ([value-1],[value-2],[value-3],[value-4])
+$sql4="INSERT INTO `tbl_custchitty`(`c_id`, `cust_id`, `status`,`add_date`) VALUES ('$chid', '$cid', '0','$dd')";
 $re4=mysqli_query($con,$sql4);
-echo $sql4;
+	}
+//INSERT INTO `tbl_custchitty`(`cust_ch_id`, `c_id`, `cust_id`, `status`) VALUES ([value-1],[value-2],[value-3],[value-4])
+//$sql4="INSERT INTO `tbl_custchitty`(`c_id`, `cust_id`, `status`,`add_date`) VALUES ('$chid', '$cid', '0','$dd')";
+//$re4=mysqli_query($con,$sql4);
+//echo $sql4;
 	
-}
-else
-{
-	echo("already exists!!!!");
+//}
+//else
+//{
+	//echo("already exists!!!!");
 
-}
+//}
 }
 ?>
 <!DOCTYPE html>
@@ -91,7 +105,7 @@ else
 	<option>select</option>
 	
   <?php
-$sq2="SELECT * FROM `tbl_customer`";
+$sq2="SELECT * FROM `tbl_customer` where status = 1";
 $result2=mysqli_query($con,$sq2);
 while($row=mysqli_fetch_array($result2))
 {

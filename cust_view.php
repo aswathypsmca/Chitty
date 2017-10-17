@@ -29,7 +29,7 @@ header('location:index.php');
  <div class="body1">
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
 <div class="body_text1">
-<a href="stafflogin.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br><br>
+<a href="adminhome.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br><br>
 
 
  
@@ -42,6 +42,7 @@ header('location:index.php');
   <!-- Div for login section -->
   <div class="login2">
 
+      
 
  <!-- <table border=5px style="margin-left:0%; margin-top:10%;">-->
  <table border=5px style="margin-left:0%; margin-top:8%;">
@@ -82,6 +83,7 @@ while($row=mysqli_fetch_array($result))
 }
 ?>  
 </table>
+
  </div> 
 
 

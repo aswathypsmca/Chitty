@@ -45,7 +45,7 @@ header('location:index.php');
   <div class="login2">
 <!--<center><img src="clg.png" id="ajce_img"width="400px" height="300px" ></center>-->
 
- <h2 style="color:red">PROFILE</h2>  
+ <h2 style="color:red"> EDIT PROFILE</h2>  
 <?php
 $vv=$_SESSION["user_name"];
 
@@ -57,19 +57,19 @@ $r=mysqli_fetch_array($result);
 ?>
 
                <div class="body_text00">
-        <form name="myform" method="post" action="memberedit.php">
+        <form name="myform" method="post" action="memberprofileedit.php">
 	 <table >
 	 <!--<td><img src="<?php echo $row['image']; ?>" width="75px" height="75px" /></td>-->
 	    <tr><td><img src="<?php echo $r['image']; ?>" width="105px" height="105px"  /></td></tr><br>
-		<tr><td> Name:</td> <td><input type="text" name="cname" value="<?php echo $r['c_name']?>"></td></tr>
-	<tr><td> Email:</td> <td><input type="email" name="email" value="<?php echo $r['c_email'] ?>" ></td></tr>
+		
+	<
 		<tr><td>Phone:</td><td><input type="phno"name="PHNO"value="<?php echo $r['c_mob']?>"></td></tr>
         
 		<tr><td> Address:</td> <td><input type="text" name="caddr" value="<?php echo $r['c_address'] ?>" ></td></tr>
 		
 		<tr><td> Place:</td> <td><input type="text" name="cplace" value="<?php echo $r['c_place'] ?>" ></td></tr>
  
-      <tr><td><button class="button" name="submit" style="margin-left:40%;">EDIT</button></td><td ><tr></tr>
+      <tr><td><button class="button" name="submit" style="margin-left:40%;">Update</button></td><td ><button class="button" name="submit" value="reset"style="margin-left:50%;">CANCEL</button></td></tr><tr></tr>
 <!--<center><img src="clg.png" id="ajce_img"width="1100px" height="300px" ></center>-->
 </table>
   	

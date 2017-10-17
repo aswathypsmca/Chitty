@@ -1,39 +1,49 @@
 <?php
 include 'dbcon.php';
 //session_start();
+//$date1 = date('Y-m-d');
 if(!(isset($_SESSION['user_name'])))
 {
 
 header('location:index.php');
 }
+$dd = date('Y-m-d');
 if(isset($_POST['submit']))
 {
 $a=$_POST["cname"];
 $b=$_POST["c_gender"];
 $c=$_POST["caddr"];
-$d=$_POST["cmob"];
-$e=$_POST["cemail"];
-$f=$_POST["cpan"];
-
+$d=$_POST["cplace"];
+$e=$_POST["cdist"];
+$f=$_POST["cpin"];
+$k=$_POST["cdob"];
+$g=$_POST["cmob"];
+$h=$_POST["cemail"];
+$i=$_POST["cpan"];
+//$j=$_POST["image"];
+$image="image/".time()."".htmlspecialchars($_FILES['image']['name']);
+move_uploaded_file($_FILES['image']['tmp_name'],$image);
 function random_password( $length = 8 ) {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
     $password = substr( str_shuffle( $chars ), 0, $length );
     return $password;
 }
 $p=random_password();
-$sql1="INSERT INTO `tbl_login`(`role_id`, `user_name`, `password`, `status`) VALUES ('3','$e','$p','0')";
+$sql1="INSERT INTO `tbl_login`(`role_id`, `user_name`, `password`, `status`) VALUES ('3','$h','$p','0')";
 $result1=mysqli_query($con,$sql1);
 $q13 = "SELECT max(`log_id`) as id FROM `tbl_login`";
 $row3 = mysqli_query($con,$q13);
 $r=mysqli_fetch_array($row3);
 $d1=$r['id'];
-
-$sq="INSERT INTO `tbl_customer` (`c_name`, `c_gender`, `c_address`, `c_mob`, `c_email`, `pan`, `log_id`, `status`) VALUES ('$a','$b','$c','$d','$e','$f','$d1','0')";
+//INSERT INTO `tbl_customer`(`cust_id`, `c_name`, `c_gender`, `c_address`, `c_place`, `c_district`, `c_pin`, 
+//`c_mob`, `c_email`, `pan`, `log_id`, `status`,`cdate`)
+$sq="INSERT INTO `tbl_customer` (`c_name`, `c_gender`, `c_address`, `c_place`, `c_district`, `c_pin`,`c_dob`, `c_mob`, `c_email`, `pan`, `log_id`, `status`,`image`,`cdate`)VALUES ('$a','$b','$c','$d','$e','$f','$k','$g','$h','$i','$d1','0','$image','$dd')";
 $resul=mysqli_query($con,$sq);
-echo $sq;
+//echo $sq;
 
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -158,28 +168,52 @@ function vali()
   <div class="login2">
 <!--<center><h2 class="login_head">-->
 <div class="body_text3">
-    <form method="post" name="myform" action="#"onSubmit="return vali()">
-	<table style="width:100% cellpadding:5%  ">
-	<br><br><tr><td><h3> MEMBER REGISTRATION	</h3></td></tr>
-	<tr><td> NAME:</td> <td><input type="text" name="cname"placeholder="Name" require onChange="return cnam()"></td></tr></br><tr></tr>
+    <form method="post" name="myform" id="myform" action="#"  enctype="multipart/form-data" onSubmit="return vali()">
+	<table style="width:100% cellpadding:5%  "><br>
+	<tr><td><h3> MEMBER REGISTRATION	</h3></td></tr>
+	<tr><td> NAME:</td> <td><input type="text" name="cname"placeholder="Name" required></td></tr></br>
 	<tr><td> GENDER:</td><td>  <input type="radio" name="c_gender" value="male" checked> Male &nbsp&nbsp
-                               <input type="radio" name="c_gender" value="female"> Female</td></tr></br><tr></tr>
+                               <input type="radio" name="c_gender" value="female"> Female</td></tr></br>
 	
-	<tr><td> ADDRESS:</td> <td><input type="text" name="caddr"placeholder="Address" required></td></tr></br><tr></tr>
-	<tr><td> PHONE:</td> <td><input type="text" name="cmob" maxlength="10"placeholder="mob num" required onChange="return phone()"></td></TR></br></tr><tr></tr>
-	<tr><td> EMAIL:</td> <td><input type="text" name="cemail" placeholder="mail_id" required onChange="return email()"></td></tr></br><tr></tr>
-	<tr><td> PAN:</td> <td><input type="text" name="cpan" placeholder="PAN" required></td></TR></br></tr><tr></tr>
+	<tr><td> ADDRESS:</td> <td><input type="text" name="caddr"placeholder="Address" required></td></tr></br>
+	<tr><td> PLACE:</td> <td><input type="text" name="cplace"placeholder="Place" required></td></tr></br>
+	<!--<tr><td> DISTRICT:</td> <td><input type="text" name="cdist"placeholder="District" required></td></tr></br><tr></tr>-->
+	<tr><td> DISTRICT:</td><td><select name="cdist"required>
+    
+     <option value="select" selected>select</option>
+    <option value="THIRUVANATHAPURAM">THIRUVANATHAPURAM</option>
+	<option value="KOLLAM">KOLLAM</option>
+    <option value="PATHANAMTHITTA">PATHANAMTHITTA</option>
+	<option value="ALAPUZHA">ALAPUZHA</option>
+	<option value="KOTTAYAM">KOTTAYAM</option>
+	<option value="IDUKKI">IDUKKI</option>
+    <option value="ERNAKULAM">ERNAKULAM</option>
+	<option value="THRISSUR">THRISSUR</option>
+	<option value="PALAKKADE">PALAKKADE</option>
+	<option value="MALAPURAM">MALAPURAM</option>
+    <option value="KOZHIKODE">KOZHIKODE</option>
+	<option value="WAYANADE">WAYANADE</option>
+	<option value="KANNUR">KANNUR</option>
+	<option value="KASARGODE">KASARGODE</option>
+	</select></td></tr></br>
 	
-	
-<tr><td >&nbsp&nbsp&nbsp&<input type="submit" name="submit" value="Register">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
-	&nbsp&nbsp</table>
+	<tr><td>Pin</td><td><input type="text" name="cpin"  required></td></tr><br>
+	<tr><td>DOB</td><td><input type="date" name="cdob" min="1957-01-1" max="1997-12-30"></td></tr><br>
+	<tr><td> PHONE:</td> <td><input type="text" name="cmob" maxlength="10"placeholder="mob num" required onChange="return phone()"></td></tr></br>
+	<tr><td> EMAIL:</td> <td><input type="text" name="cemail" placeholder="mail_id" required onChange="return email()"></td></tr></br>
+	<tr><td> PAN:</td> <td><input type="text" name="cpan" placeholder="PAN" required></td></tr></br>
+	<tr><td>Photo:</td><td><input type="file" name="image" id="image"/></td></tr>
+	<tr><td><input type="submit" name="submit" value="Register">
+	<input type="reset" name="clear" value="RESET"></tr></td>
+	<!--<tr><td >&nbsp&nbsp&nbsp&nbsp&nbsp<input type="submit" name="submit" value="Register">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
+	&nbsp&nbsp--></table>
 	
 	</form>
 	
 </div></div>
 
   
-<!--<center><img src="clg.png" id="ajce_img"width="1100px" height="300px" ></center>-->
+
 
    
       

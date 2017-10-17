@@ -6,22 +6,40 @@ if(!(isset($_SESSION['user_name'])))
 
 //header('location:index.php');
 }
-
+$dd = date('Y-m-d');
 if(isset($_POST['submit']))
 {
 $a=$_POST["sname"];
 $b=$_POST["sgender"];
 $c=$_POST["saddress"];
-$d=$_POST["phno"];
+$d=$_POST["splace"];
+$e=$_POST["sdist"];
+$f=$_POST["spin"];
+$g=$_POST["phno"];
 
 //echo $d;
-$e=$_POST["dob"];
-$f=$_POST["email"];
-$g=$_POST["doj"];
+$h=$_POST["dob"];
+$i=$_POST["email"];
+//$j=$_POST["image"];
+$image="image/".time()."".htmlspecialchars($_FILES['image']['name']);
+move_uploaded_file($_FILES['image']['tmp_name'],$image);
+function random_password( $length = 8 ) {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+    $password = substr( str_shuffle( $chars ), 0, $length );
+    return $password;
+}
+$p=random_password();
+$sql1="INSERT INTO `tbl_login`(`role_id`, `user_name`, `password`, `status`) VALUES ('2','$i','$p','0')";
+$result1=mysqli_query($con,$sql1);
+$q13 = "SELECT max(`log_id`) as id FROM `tbl_login`";
+$row3 = mysqli_query($con,$q13);
+$r=mysqli_fetch_array($row3);
+$d1=$r['id'];
 
 //INSERT INTO `tbl_staff`(`s_id`, `s_name`, `s_gender`, `s_address`, `s_mob`, `dob`, `s_email`, `doj`, `log_id`)
 //INSERT INTO `tbl_login`(`log_id`, `role_id`, `user_name`, `password`, `status`) VALUES
-$sql1="INSERT INTO `tbl_staff`(`s_name`, `s_gender`, `s_address`, `s_mob`, `dob`, `s_email`, `doj`, `log_id`) VALUES ('$a','$b','$c','$d','$e','$f','$g','1')";
+//INSERT INTO `tbl_staff`(`s_id`, `log_id`, `sdate`, `s_name`, `s_gender`, `s_address`, `splace`, `sdist`, `spin`, `s_mob`, `dob`, `s_email`, `sphoto`)
+$sql1="INSERT INTO `tbl_staff`(`log_id`,`s_name`, `s_gender`, `s_address`, `splace`, `sdist`, `spin`, `s_mob`, `dob`, `s_email`,`image`,`sdate`) VALUES ('$d1','$a','$b','$c','$d','$e','$f','$g','$h','$i','$image','$dd')";
 $result1=mysqli_query($con,$sql1);
 //echo $sql1;
 $q11 = "SELECT `s_id` FROM `tbl_staff` WHERE `s_name`=$a ";
@@ -30,15 +48,8 @@ $q11 = "SELECT `s_id` FROM `tbl_staff` WHERE `s_name`=$a ";
 $row1 = mysqli_query($con,$q11);
 //$dd=$row1['s_id'];
 //echo($dd);
-function random_password( $length = 8 ) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
-    $password = substr( str_shuffle( $chars ), 0, $length );
-    return $password;
-}
-$p=random_password();
 
-$sql1="INSERT INTO `tbl_login`(`role_id`, `user_name`, `password`, `status`) VALUES ('2','$f','$p','0')";
-$result1=mysqli_query($con,$sql1);
+
 
 }
 ?>
@@ -174,9 +185,9 @@ function vali()
   <!-- Div for login section -->
   <div class="login2">
 <!--<center><h2 class="login_head">-->
-<div class="body_text2">
+<div class="body_text3">
 
-    <form method="post" name="myform"  action="#" onSubmit="return vali()">
+    <form method="post" name="myform"  action="#" enctype="multipart/form-data"  onSubmit="return vali()">
 	<table style="width:200% cellpadding:1%  ">
 	<tr><td><h3>STAFF REGISTRATION</h3></td></tr>
 	<tr><td> NAME:</td> <td><input type="text" name="sname" placeholder="name" onChange="return snam()"></td></tr></br><tr></tr>>
@@ -184,10 +195,34 @@ function vali()
 	<tr><td> GENDER:</td><td>  <input type="radio" name="sgender" value="male" checked> Male &nbsp&nbsp
                                <input type="radio" name="sgender" value="female"> Female</td></tr></br><tr></tr>
 	<tr><td> ADDRESS:</td> <td><input type="text" name="saddress" placeholder="Address" required></td></tr></br><tr></tr>
+	
+	<tr><td> PLACE:</td> <td><input type="text" name="splace"placeholder="Place" required></td></tr></br><tr></tr>
+	<!--<tr><td> DISTRICT:</td> <td><input type="text" name="cdist"placeholder="District" required></td></tr></br><tr></tr>-->
+	<tr><td> DISTRICT:</td><td><select name="sdist"required>
+    
+     <option value="select" selected>select</option>
+    <option value="THIRUVANATHAPURAM">THIRUVANATHAPURAM</option>
+	<option value="KOLLAM">KOLLAM</option>
+    <option value="PATHANAMTHITTA">PATHANAMTHITTA</option>
+	<option value="ALAPUZHA">ALAPUZHA</option>
+	<option value="KOTTAYAM">KOTTAYAM</option>
+	<option value="IDUKKI">IDUKKI</option>
+    <option value="ERNAKULAM">ERNAKULAM</option>
+	<option value="THRISSUR">THRISSUR</option>
+	<option value="PALAKKADE">PALAKKADE</option>
+	<option value="MALAPURAM">MALAPURAM</option>
+    <option value="KOZHIKODE">KOZHIKODE</option>
+	<option value="WAYANADE">WAYANADE</option>
+	<option value="KANNUR">KANNUR</option>
+	<option value="KASARGODE">KASARGODE</option>
+	</select></td></tr></br><tr></tr>
+	
+	<tr><td>Pin</td><td><input type="text" name="spin"  required></td></tr>
 	<tr><td> PHONE:</td> <td><input type="text" name="phno" placeholder="mob num" required  onChange="return phone()"></td></tr></br><tr></tr>
 	<tr><td> DOB:</td> <td> <input type = "date" name="dob" required></td></tr></br><tr></tr>
 	<tr><td> EMAIL:</td> <td><input type="text" name="email" placeholder="mail_id" onChange="return semail()"></td></tr></br><tr></tr>
-	<tr><td> DOJ:</td> <td><input type="date" name="doj"required></td></tr></br><tr></tr>
+	<!--<tr><td> DOJ:</td> <td><input type="date" name="doj"required></td></tr></br><tr></tr>-->
+	<tr><td>Photo:</td><td><input type="file" name="image" id="image"/></td></tr>
 	<tr><td ><input type="submit" name="submit" value="Register" >&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
 	&nbsp&nbsp</table>
 </form>

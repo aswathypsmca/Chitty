@@ -29,36 +29,13 @@ header('location:index.php');
  
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
 <div class="body_text1">
-<?php
-$vv=$_SESSION["user_name"];
-
-$sql="SELECT * FROM  `tbl_staff` WHERE s_email='$vv'";
-
-$result=mysqli_query($con,$sql);
-$r=mysqli_fetch_array($result);
-
-?>
-<img src="<?php echo $r['image']; ?>" width="105px" height="105px"  /><br>
-
-
-<div class="dropdown">
-<a href="#" id="user">VIEW</a>
-<div class="dropdown-content">
-		<a href=" staffprofile.php">PROFILE</a><BR>
-		<a href=" auction.php"> AUCTION</a>
- 
-</div></div>
- <br><br><br><br>
-
-<a href="memberreg.php" id="user"> MEMBER</a><br><br>
-<div class="dropdown">
-<a href="#" id="user" >PAYMENT</a>
-<div class="dropdown-content">
-         <a href="chittypayment.php">CHITTY </a><br>
-		 <a href="auctionpayment.php">AUCTION </a><br>
-</div></div><br><br><br><br>		 
 
  
+
+<a href="stafflogin.php" > HOME</a><br><br>
+		 
+<a href="auction_data.php" > AUCTION WINNER</a><br><br>
+ <a href="lot_data.php" > LOT WINNER</a><br><br>
   <a href="logout.php">LOGOUT</a><br>
 
 

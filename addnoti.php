@@ -6,6 +6,16 @@ if(!(isset($_SESSION['user_name'])))
 
 header('location:index.php');
 }
+$c = date('Y-m-d');
+if(isset($_POST["submit"]))
+{
+
+//$b=$_POST["date"];
+$a=$_POST["noti"];
+
+$sql="INSERT INTO `notification`(  `notification`, `date`) VALUES ('$a','$c')";
+$result=mysqli_query($con,$sql);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +42,7 @@ header('location:index.php');
   <div class="body1" >
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
     <div class="body_text1">
-
+<a href="adminhome.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br>
 <div class="dropdown">
 <a href="#" id="user">USERS</a>
 <div class="dropdown-content">
@@ -45,7 +55,7 @@ header('location:index.php');
 
  <br><br>
  <a href="addnoti.php">NOTIFICATION</a><br><br>
- <a href="view_feedback.php">FEEDBACK</a><br><br>
+ <a href="vfeedback.php">FEEDBACK</a><br><br>
  
   <a href="logout.php">LOGOUT</a><br>
 
@@ -54,10 +64,23 @@ header('location:index.php');
     </div>
   </div>
   <!-- Div for login section -->
-  <div class="login1">
+  <div class="login2">
   
 <!--<img src="clg.png" id="ajce_img" width="800px" height="300px" >
 -->
+<div class="body_text2">
+    <form method="post" name="myform" action="#">
+	<table style="width:200% cellpadding:1%  ">
+	<br><BR><BR><BR><br><br><br><tr><td><h3>ADD NOTIFICATION</h3></td></tr>
+	
+	
+	<tr><td> Enter Notification:</td><td><input type="textarea" name="noti" required></td></tr>
+	
+	<!--<tr><td> START DATE:</td> <td><input type="date" name="sdate"required></td></tr></br><tr></tr>-->
+	<tr><td ><input type="submit" name="submit" value="SAVE">&nbsp&nbsp<input type="reset" name="clear" value="RESET"></td></tr><tr></tr>	
+	&nbsp&nbsp</table>
+</form>
+</div>
       </div>
       <div class="footer">
         <center><marquee>GRAMIN CHITTY MANAGEMENT</marquee></center>

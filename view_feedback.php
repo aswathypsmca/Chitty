@@ -6,6 +6,7 @@ if(!(isset($_SESSION['user_name'])))
 
 header('location:index.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,36 +31,16 @@ header('location:index.php');
   <div class="body1">
    <!-- <center><img src="ajce.png" id="ajce_img"></center>-->
     <div class="body_text1">
-	<?php
-$vv=$_SESSION["user_name"];
-
-$sql="SELECT * FROM  `tbl_customer` WHERE c_email='$vv'";
-
-$result=mysqli_query($con,$sql);
-$r=mysqli_fetch_array($result);
-
-?>
-<b class="heading22"><strong><font color="blue" size="5">WELCOME </font></strong></b><br>
-<img src="<?php echo $r['image']; ?>" width="105px" height="105px"  /><br>
-
+	
 
 <!--<font size=3 color="white"><b>WELCOME</b> <i> <?php echo $r['c_name']; ?></i></font><br>-->
-
+<br><a href="adminhome.php">HOME<img src="home.jpg" id="homeimg" width="28px" height="15px"></a><br><br>
 
 <!--<a href="viewauction.php" >VIEW AUCTION</a>
 <br><br>-->
 
- <div class="dropdown">
-<a href="#" id="user"> VIEW</a>
-<div class="dropdown-content">
-		<a href=" memberprofile.php">PROFILE</a><br>
-		<a href="viewauction.php">AUCTION</a>
-		
-		
-	</div>
-</div>
+ 
 <br><br>
-<a href="feedback.php" >FEED BACK</a><br><br>
 
  
   <a href="logout.php">LOGOUT</a><br>
@@ -70,7 +51,44 @@ $r=mysqli_fetch_array($result);
   </div>
   <!-- Div for login section -->
   <div class="login2">
-    <br><br><b class="heading25"><strong><font color="blue" size="5"><center><marquee>WELCOME <i><font color="red" size="6"> <?php echo $r['c_name']; ?></font></i>&nbsp PLEASE CHECK OUT  <a href="view_notification.php" ><font color="red" size="5">&nbsp&nbsp**NOTIFICATION**</font></a> </marquee></center></font></strong></b>
+  <div class="body_textt4">
+    <form method="post" name="myform" action="#">
+	<br><br><br><tr><td><h3>FEEDBACK</h3></td></tr>
+	<!--<table style="width:200% cellpadding:1%  table border=1 " >-->
+	<!--<table border="1" style="width:200% cellpadding:1%">-->
+	
+	<table border=5px style="margin-left:0%; ">
+<tr><th>DATE</th><th>ID</th><th>username</th><th>feedback</th></tr>
+<?php 
+$sql="SELECT * FROM `tbl_feedback` ";
+$result=mysqli_query($con,$sql);
+//$i=0;
+while($row=mysqli_fetch_array($result))
+{
+	?>
+	<tr>
+	<td><?php echo $row['date'] ?></td>
+	<td><?php echo $row['cust_id'] ?></td>
+	
+	<td><?php echo $row['email'] ?></td>
+	<td><?php echo $row['feedback'] ?></td>
+    
+	 
+		<!--<form action="deletemember.php" method="post"> -->
+	 <td><a href="feedbackdelete.php?id=<?php echo $row['f_id'];?>">Delete</a></td></tr>
+	<!-- <td><a href="deletemember.php?id=<?php echo $row['cust_id']; ?>">Delete</a></td>
+	</tr>-->
+	
+	<?php
+}
+?>  
+
+  </table>
+	<!--<tr><td> START DATE:</td> <td><input type="date" name="sdate"required></td></tr></br><tr></tr>-->
+	
+</form>
+
+    </div>
   </div>
 <div class="footer">
         <center><marquee>GRAMIN CHITTY MANAGEMENT</marquee></center>

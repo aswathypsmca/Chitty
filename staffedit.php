@@ -61,17 +61,17 @@ $result1=mysqli_query($con,$sql1);
 ?>
 
                <div class="body_text11">
-        <form name="myform" method="post" action="staffedit.php">
+        <form name="myform" method="post" action="staffprofileedit.php">
 	 <table >
 	 <tr><td><img src="<?php echo $r['image']; ?>" width="105px" height="105px"  /></td></tr><br>
-		<tr><td> name:</td> <td><input type="text" name="sname" value="<?php echo $r['s_name']?>"></td></tr>
+		
 	
 		<tr><td>Phone:</td><td><input type="phno"name="PHNO"value="<?php echo $r['s_mob']?>"></td></tr>
-        <tr><td> Email:</td> <td><input type="email" name="email" value="<?php echo $r['s_email'] ?>" ></td></tr>
+        
 		<tr><td> Address:</td> <td><input type="text" name="saddress" value="<?php echo $r['s_address']?>"></td></tr>
 		<tr><td> Place:</td> <td><input type="text" name="splace" value="<?php echo $r['splace']?>"></td></tr>
-		<tr><td>DOJ:</td><td><?php echo $r['sdate']; ?></td></tr>
-		<tr><td><button class="button" name="submit" style="margin-left:40%;">EDIT</button></td></tr><tr></tr>
+		
+		<tr><td><button class="button" name="submit" style="margin-left:40%;">Update</button></td></tr><tr></tr>
 				&nbsp&nbsp</table>
  
       
